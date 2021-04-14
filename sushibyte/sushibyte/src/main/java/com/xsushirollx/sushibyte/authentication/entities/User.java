@@ -1,6 +1,8 @@
 package com.xsushirollx.sushibyte.authentication.entities;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +30,20 @@ public class User {
 	private String username;
 	@Column(name = "password")
 	private String password;
-	@Column(name = "salt")
-	private String salt;
 	@Column(name = "user_role")
 	private int userRole;
 
+	public User(String firstName, String lastName, String phone, String email, String username, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		userRole=3;	//customer
+		createdAt = Timestamp.from(Instant.now());
+	}
+	
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
@@ -47,14 +58,6 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	@Column(name = "is_active")
