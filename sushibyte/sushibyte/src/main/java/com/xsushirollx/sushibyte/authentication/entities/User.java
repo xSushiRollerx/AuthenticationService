@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
@@ -31,7 +31,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "user_role")
-	private int userRole;
+	private Integer userRole;
 
 	public User(String firstName, String lastName, String phone, String email, String username, String password) {
 		this.firstName = firstName;
@@ -63,19 +63,19 @@ public class User {
 	@Column(name = "is_active")
 	private boolean isActive;
 
-	public int getUserRole() {
+	public Integer getUserRole() {
 		return userRole;
 	}
 
-	public void setUserRole(int userRole) {
+	public void setUserRole(Integer userRole) {
 		this.userRole = userRole;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

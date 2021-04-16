@@ -16,7 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 	private boolean isActive;
 	private List<GrantedAuthority> authority;
-	private int id;
+	private Integer id;
 	
 	public UserDetailsImpl(User user){
 		username = user.getUsername();
@@ -78,11 +78,11 @@ public class UserDetailsImpl implements UserDetails {
 		return isActive;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
