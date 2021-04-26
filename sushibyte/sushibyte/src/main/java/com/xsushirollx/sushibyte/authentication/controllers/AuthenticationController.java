@@ -11,13 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.xsushirollx.sushibyte.authentication.config.JwtTokenUtil;
+import com.xsushirollx.sushibyte.authentication.config.JwtUtil;
 import com.xsushirollx.sushibyte.authentication.dto.AuthRequest;
 
 @RestController
 public class AuthenticationController {
 	@Autowired
-	JwtTokenUtil jwtTokenUtil;
+	JwtUtil jwtTokenUtil;
 	@Autowired
 	AuthenticationManager authenticationManager;
 	static Logger log = LogManager.getLogger(AuthenticationController.class.getName());

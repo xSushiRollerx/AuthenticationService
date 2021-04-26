@@ -1,4 +1,4 @@
-package com.xsushirollx.sushibyte.authentication.config;
+package com.xsushirollx.sushibyte.authentication;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -14,12 +14,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import com.xsushirollx.sushibyte.authentication.config.JwtTokenFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -41,53 +45,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		// Enable CORS and disable CSRF
-        http = http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable().authorizeRequests()
+        		.antMatchers("/authenticate").permitAll()
+        		.anyRequest().authenticated()
+        		.and().sessionManagement()
+        		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // Set session management to stateless
-        http = http
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and();
-
-        // Set unauthorized requests exception handler
-        http = http
-            .exceptionHandling()
-            .authenticationEntryPoint(
-                (request, response, ex) -> {
-                    response.sendError(
-                        HttpServletResponse.SC_UNAUTHORIZED,
-                        ex.getMessage()
-                    );
-                }
-            )
-            .and();
-        
-        //To be modified to fit project endpoints
-		http.authorizeRequests()
-		.antMatchers("/login").permitAll()
-		.anyRequest().authenticated()
-		.and().oauth2ResourceServer().jwt();
-		
-		http.addFilterBefore(
-	            jwtTokenFilter,
-	            UsernamePasswordAuthenticationFilter.class
-	        );
+        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-	
-//	@Bean
-//	public JwtDecoder customDecoder(OAuth2ResourceServerProperties properties) {
-//	    NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(
-//	      properties.getJwt().getJwkSetUri()).build();
-//	    
-//	    jwtDecoder.setClaimSetConverter(new OrganizationSubClaimAdapter());
-//	    return jwtDecoder;
-//	}
 	
 	// Used by spring security if CORS is enabled.
     @Bean
@@ -101,6 +71,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
+    }
+    
+    @Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
     }
 	
 }

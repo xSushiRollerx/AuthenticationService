@@ -27,8 +27,4 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		return new UserDetailsImpl(user.get());
 	}
 	
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
