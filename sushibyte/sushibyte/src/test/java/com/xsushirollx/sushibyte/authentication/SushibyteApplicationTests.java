@@ -1,4 +1,4 @@
-package com.xsushirollx.sushibyte;
+package com.xsushirollx.sushibyte.authentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

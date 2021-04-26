@@ -1,8 +1,6 @@
 package com.xsushirollx.sushibyte.authentication.entities;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,54 +29,14 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "user_role")
-	private Integer userRole;
-
-	public User(String firstName, String lastName, String phone, String email, String username, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		userRole=3;	//customer
-		createdAt = Timestamp.from(Instant.now());
-	}
-	
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	private int userRole;
 	@Column(name = "is_active")
 	private boolean isActive;
-
-	public Integer getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(Integer userRole) {
-		this.userRole = userRole;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
+	
+	public User() {
+		
+	}	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -95,12 +53,44 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public void setUserRole(int userRole) {
+		this.userRole = userRole;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public String getPhone() {
 		return phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getUserRole() {
+		return userRole;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

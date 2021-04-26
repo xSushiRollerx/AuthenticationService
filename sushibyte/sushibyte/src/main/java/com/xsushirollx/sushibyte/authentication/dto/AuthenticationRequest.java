@@ -1,6 +1,6 @@
 package com.xsushirollx.sushibyte.authentication.dto;
 
-public class AuthRequest {
+public class AuthenticationRequest {
 	private String username;
 	private String password;
 	public String getUsername() {
@@ -15,5 +15,4 @@ public class AuthRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 }

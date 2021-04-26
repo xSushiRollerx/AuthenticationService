@@ -1,5 +1,5 @@
   
-package com.xsushirollx.sushibyte.authentication.config;
+package com.xsushirollx.sushibyte.authentication.utils;
 
 import java.util.Date;
 import java.util.HashMap;

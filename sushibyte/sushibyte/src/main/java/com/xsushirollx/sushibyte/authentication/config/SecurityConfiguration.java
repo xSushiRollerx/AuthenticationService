@@ -1,4 +1,4 @@
-package com.xsushirollx.sushibyte.authentication;
+package com.xsushirollx.sushibyte.authentication.config;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -23,7 +23,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.xsushirollx.sushibyte.authentication.config.JwtTokenFilter;
+import com.xsushirollx.sushibyte.authentication.filters.JwtFilter;
+import com.xsushirollx.sushibyte.authentication.services.UserDetailServiceImpl;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -34,19 +35,20 @@ import com.xsushirollx.sushibyte.authentication.config.JwtTokenFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	DataSource dataSource;
+	UserDetailServiceImpl userDetailsService;
 	@Autowired
-	JwtTokenFilter jwtTokenFilter;
+	JwtFilter jwtTokenFilter;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.jdbcAuthentication().dataSource(dataSource);
+		auth.userDetailsService(userDetailsService);
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable().authorizeRequests()
         		.antMatchers("/authenticate").permitAll()
+        		.antMatchers("/login").permitAll()
         		.anyRequest().authenticated()
         		.and().sessionManagement()
         		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
