@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
 	public UserDetailsImpl(User user){
 		username = user.getUsername();
 		password = user.getPassword();
-		isActive = true;
+		isActive = user.isActive();
 		authority = new ArrayList<GrantedAuthority>();
 		switch(user.getUserRole()) {
 		case 1:
@@ -31,6 +31,8 @@ public class UserDetailsImpl implements UserDetails {
 		case 3:
 			authority.add(new SimpleGrantedAuthority("DRIVER"));
 			break;
+		case 4:
+			authority.add(new SimpleGrantedAuthority("OWNER"));
 		}
 	}
 	

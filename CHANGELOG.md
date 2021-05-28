@@ -1,3 +1,15 @@
+commit 2489b3a0749cb0cc4a4d67ade0c3955092091733
+Author: damocles-coder <dylan.tran@smoothstack.com>
+Date:   Wed Apr 28 09:01:42 2021 -0700
+
+    Added integration tests
+
+commit 16629dea3fa92e22af69247820e6279593f47a0d
+Author: Damocles-coder <35568707+dyltra@users.noreply.github.com>
+Date:   Mon Apr 26 16:28:04 2021 -0700
+
+    Finished the implementation, now onto testing
+
 commit 396b4812255fae88c8e1ff228c53d31461d1253d
 Author: damocles-coder <dylan.tran@smoothstack.com>
 Date:   Sun Apr 25 23:17:20 2021 -0700

@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.xsushirollx.sushibyte.authentication.Exception.UserNotAuthorizeException;
 import com.xsushirollx.sushibyte.authentication.dao.UserDAO;
 import com.xsushirollx.sushibyte.authentication.entities.User;
 import com.xsushirollx.sushibyte.authentication.entities.UserDetailsImpl;
@@ -19,6 +21,17 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		User user = userDAO.findByUsername(username);
 		if (user==null) {
 			throw new UsernameNotFoundException("not found " + username);
+		}
+		return new UserDetailsImpl(user);
+	}
+	
+	public UserDetails loadAdminByUsername(String username) throws UsernameNotFoundException, UserNotAuthorizeException{
+		User user = userDAO.findByUsername(username);
+		if (user==null) {
+			throw new UsernameNotFoundException("not found " + username);
+		}
+		if (!user.getEmail().endsWith("@smoothstack.com")) {
+			throw new UserNotAuthorizeException(username+" not authorized as admin");
 		}
 		return new UserDetailsImpl(user);
 	}
