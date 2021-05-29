@@ -27,7 +27,7 @@ public class AuthenticationController {
 	AuthenticationManager authenticationManager;
 	static Logger log = LogManager.getLogger(AuthenticationController.class.getName());
 	
-	@PostMapping("/authenticate")
+	@PostMapping("/authenticate/user")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( 
@@ -43,7 +43,7 @@ public class AuthenticationController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	
-	@PostMapping("/authenticate_admin")
+	@PostMapping("/authenticate/admin")
 	public ResponseEntity<?> createAdminAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( 
