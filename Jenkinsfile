@@ -10,6 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Run Maven on a Unix agent.
+                sh "pwd"
                 sh "mvn clean package"
 
                 // To run Maven on a Windows agent, use
