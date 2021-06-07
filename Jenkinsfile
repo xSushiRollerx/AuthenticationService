@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            	cleanWs()
                 // Run Maven on a Unix agent.
                 sh "pwd"
                 sh "mvn clean package"
