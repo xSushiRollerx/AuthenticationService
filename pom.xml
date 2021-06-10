@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xsushirollx</groupId>
-	<artifactId>sushibyte</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>authentication-service</artifactId>
+	<version>1.0</version>
 	<name>sushibyte</name>
 	<description>Project for user authentication using jwt tokens</description>
 	<properties>
